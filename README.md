@@ -59,6 +59,12 @@ Site administration → Courses → Manage courses and categories. Click into ea
 - Theme-agnostic — all CSS is scoped under `.cri-wrap` to prevent style bleed
 - Multi-tenant safe — queries the current user's data regardless of tenant
 
+## License
+
+Copyright © 2026 MaxxContent LLC.
+
+This plugin is licensed under the GNU General Public License v3.0 or later — the same license as Moodle itself. See [LICENSE](LICENSE) for the full text.
+
 ## Contact
 
 For questions about plugin behavior or configuration, contact the MaxxLMS team. Full technical documentation available separately.
