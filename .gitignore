@@ -1,0 +1,9 @@
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.bak
+*.swp
+
+# Packaged zips (build these from the repo instead)
+*.zip

@@ -1,0 +1,509 @@
+/* ────────────────────────────────────────────────────────────────
+   Community Reentry Initiative — Progress dashboard
+   Brand: purple #582c83, gold #FE9D1B, navy #004471, gray #728491
+   ──────────────────────────────────────────────────────────────── */
+
+.cri-wrap {
+  --purple: #582c83;
+  --purple-soft: #f3eef9;
+  --gold: #FE9D1B;
+  --gold-soft: #fef3e0;
+  --navy: #004471;
+  --navy-soft: #e6eef4;
+  --gray: #728491;
+  --gray-light: #d8dde2;
+  --gray-soft: #f4f5f7;
+  --green: #2e7d4f;
+
+  --text: #1a2332;
+  --text-muted: #6b7884;
+  --border: #e6e9ed;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 1px 3px rgba(16,24,40,.04), 0 4px 14px rgba(16,24,40,.05);
+  --shadow-card-hover: 0 4px 8px rgba(16,24,40,.06), 0 16px 32px rgba(88,44,131,.08);
+  --transition: all .22s cubic-bezier(.4,0,.2,1);
+
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: var(--text);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px 0 60px;
+  line-height: 1.5;
+}
+
+.cri-wrap * { box-sizing: border-box; }
+
+/* ────────── HERO ────────── */
+.cri-hero {
+  background: linear-gradient(135deg, var(--purple) 0%, #6e3aa3 60%, var(--navy) 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(88,44,131,.22);
+}
+.cri-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254,157,27,.22) 0%, transparent 70%);
+}
+.cri-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -120px; left: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.06) 0%, transparent 70%);
+}
+.cri-hero-text { position: relative; z-index: 1; }
+.cri-hero-eyebrow {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.cri-hero-title {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  letter-spacing: -.01em;
+  color: #fff;
+}
+.cri-hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,.82);
+  max-width: 540px;
+  line-height: 1.55;
+  margin: 0;
+}
+.cri-hero-stats {
+  display: flex;
+  gap: 28px;
+  margin-top: 22px;
+}
+.cri-hero-stat {
+  border-left: 2px solid rgba(255,255,255,.25);
+  padding-left: 14px;
+}
+.cri-hero-stat-num {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+.cri-hero-stat-label {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.7);
+  margin-top: 4px;
+}
+.cri-hero-ring {
+  position: relative;
+  z-index: 1;
+  width: 180px; height: 180px;
+  flex-shrink: 0;
+}
+.cri-hero-ring svg {
+  display: block;
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.cri-hero-ring .cri-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,.15);
+  stroke-width: 14;
+}
+.cri-hero-ring .cri-ring-fill {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 14;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
+}
+.cri-hero-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.cri-hero-ring-pct {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+.cri-hero-ring-cap {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: rgba(255,255,255,.75);
+  margin-top: 6px;
+}
+
+/* ─── v1.1.0 — INSTRUCTION BANNER ─── */
+.cri-instruct {
+  margin-top: 24px;
+  padding: 18px 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(16,24,40,.03);
+}
+.cri-instruct-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cri-instruct-icon svg { width: 22px; height: 22px; }
+.cri-instruct-text {
+  font-size: .95rem;
+  color: var(--text);
+  line-height: 1.45;
+}
+.cri-instruct-text strong {
+  color: var(--purple);
+  font-weight: 700;
+}
+
+/* ────────── SECTION HEADING ────────── */
+.cri-section-head {
+  margin: 32px 0 18px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.cri-section-head h2 {
+  font-size: 1.25rem;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+.cri-section-meta {
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+
+/* ────────── GRID ────────── */
+.cri-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* ────────── CARD ────────── */
+.cri-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 22px 8px;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: cri-card-in .55s cubic-bezier(.4,0,.2,1) forwards;
+}
+.cri-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--gray-light);
+}
+.cri-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent, var(--purple));
+  opacity: .85;
+}
+@keyframes cri-card-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cri-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.cri-card-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--accent-soft, var(--purple-soft));
+  color: var(--accent, var(--purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cri-card-icon svg { width: 22px; height: 22px; }
+.cri-card-meta { flex: 1; min-width: 0; }
+.cri-card-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin: 0 0 4px;
+}
+.cri-card-count {
+  font-size: .8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin: 0;
+}
+.cri-card-count strong {
+  color: var(--accent, var(--purple));
+  font-weight: 700;
+}
+.cri-card-count.cri-warn { color: #c0392b; }
+
+/* Card ring */
+.cri-card-ring {
+  width: 56px; height: 56px;
+  position: relative;
+  flex-shrink: 0;
+}
+.cri-card-ring svg {
+  display: block;
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.cri-card-ring .cri-ring-track {
+  fill: none;
+  stroke: var(--gray-soft);
+  stroke-width: 6;
+}
+.cri-card-ring .cri-ring-fill {
+  fill: none;
+  stroke: var(--accent, var(--purple));
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1);
+}
+.cri-card-ring-pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Slim progress bar */
+.cri-card-bar {
+  height: 6px;
+  background: var(--gray-soft);
+  border-radius: 100px;
+  margin: 0 0 14px;
+  overflow: hidden;
+}
+.cri-card-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent, var(--purple)), var(--accent-light, var(--gold)));
+  border-radius: 100px;
+  transition: width 1s cubic-bezier(.4,0,.2,1);
+}
+
+/* Course list */
+.cri-course-list {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+.cri-course-item {
+  border-top: 1px solid var(--border);
+}
+.cri-course-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 4px;
+  font-size: .88rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+  border-radius: var(--radius-sm);
+}
+.cri-course-link:hover {
+  background: var(--gray-soft);
+  margin: 0 -8px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--text);
+}
+.cri-course-name {
+  flex: 1;
+  line-height: 1.35;
+}
+.cri-status-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.cri-dot-complete {
+  background: var(--green);
+  color: #fff;
+}
+.cri-dot-complete svg { width: 10px; height: 10px; }
+.cri-dot-progress {
+  background: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-soft);
+}
+.cri-dot-progress::after {
+  content: '';
+  width: 6px; height: 6px;
+  background: #fff;
+  border-radius: 50%;
+}
+.cri-dot-ready {
+  background: transparent;
+  border: 2px solid var(--gray-light);
+}
+
+.cri-status-complete .cri-course-name { color: var(--text-muted); }
+.cri-status-progress .cri-course-name { color: var(--text); font-weight: 600; }
+
+/* ─── v1.1.0 — ACTION PILL (replaces old status label) ─── */
+.cri-action {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--accent, var(--purple));
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 100px;
+  background: var(--accent-soft, var(--purple-soft));
+  transition: var(--transition);
+}
+.cri-action svg {
+  width: 11px;
+  height: 11px;
+  transition: transform .22s ease;
+}
+.cri-course-link:hover .cri-action {
+  background: var(--accent, var(--purple));
+  color: #fff;
+}
+.cri-course-link:hover .cri-action svg {
+  transform: translateX(2px);
+}
+/* Status-specific pill colors — complete uses green, progress uses gold */
+.cri-status-complete .cri-action {
+  color: var(--green);
+  background: #e7f3ec;
+}
+.cri-course-link:hover .cri-status-complete .cri-action,
+.cri-status-complete .cri-course-link:hover .cri-action {
+  background: var(--green);
+  color: #fff;
+}
+.cri-status-progress .cri-action {
+  color: #b8740b;
+  background: var(--gold-soft);
+}
+.cri-course-link:hover .cri-status-progress .cri-action,
+.cri-status-progress .cri-course-link:hover .cri-action {
+  background: var(--gold);
+  color: #fff;
+}
+
+.cri-empty {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: .85rem;
+  margin: 4px 0 12px;
+}
+
+/* ────────── ACCENT THEMES ────────── */
+.cri-cat-mindset       { --accent: #582c83; --accent-soft: #f3eef9; --accent-light: #8a5cb8; }
+.cri-cat-relationships { --accent: #004471; --accent-soft: #e6eef4; --accent-light: #3d77a3; }
+.cri-cat-learning      { --accent: #2e7d4f; --accent-soft: #e7f3ec; --accent-light: #5da77a; }
+.cri-cat-work          { --accent: #FE9D1B; --accent-soft: #fef3e0; --accent-light: #ffbb5e; }
+.cri-cat-money         { --accent: #b8860b; --accent-soft: #fdf3d4; --accent-light: #e0a829; }
+.cri-cat-health        { --accent: #c0392b; --accent-soft: #fbe8e6; --accent-light: #d96a5d; }
+.cri-cat-reentry       { --accent: #728491; --accent-soft: #eef1f4; --accent-light: #9aabb6; }
+
+/* ────────── LEGEND ────────── */
+.cri-legend {
+  margin-top: 38px;
+  padding: 18px 22px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+.cri-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ────────── RESPONSIVE ────────── */
+@media (max-width: 768px) {
+  .cri-hero {
+    grid-template-columns: 1fr;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .cri-hero-stats { justify-content: center; flex-wrap: wrap; gap: 18px; }
+  .cri-hero-ring { margin: 0 auto; width: 150px; height: 150px; }
+  .cri-hero-stat { border-left: none; border-top: 2px solid rgba(255,255,255,.2); padding: 8px 0 0; }
+  .cri-grid { grid-template-columns: 1fr; }
+  .cri-instruct {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px 20px;
+  }
+  .cri-instruct-text { font-size: .9rem; }
+  .cri-action {
+    padding: 5px 8px;
+    font-size: .68rem;
+  }
+}
